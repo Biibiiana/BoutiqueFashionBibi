@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="tienda.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="img/boutique.ico" type="image/png">
+    <title>Tu tienda online de confianza</title>
+  </head>
+  <body>
+    <header>
+      <nav id="navprincipal" class="navbar navbar-expand-lg navbar-light bg-medium-ligth-blue">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">
+            <img src="img/boutique-removebg-preview.png" class="w-h-logo" alt="Boutique Logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse gap-5" id="navbarNavDropdown">
+            <ul class="navbar-nav nav-pills align-items-center mb-2 mb-lg-0 fs-5 ms-auto gap-4">
+              <li class="nav-item text-dark">
+                <a class="nav-link active text-dark" aria-current="page" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link text-dark" onclick="mostrarTodo()">Catálogo</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link text-dark" onclick="scrollF()">Scroll Infinito</button>
+              </li>
+              <li class="nav-item dropdown">
+                <button class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">Categorías</button>
+                <ul class="dropdown-menu">
+                </ul>
+              </li>
+              <li class="nav-item cart-container">
+                <a class="nav-link" href="#" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="img/carrito.png" alt="Shopping Cart" width="24" height="24">
+                  <span class="cart-badge"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <div class="cart-dropdown" aria-labelledby="cartDropdown">
+                    <ul class="list-group" id="cartItems"></ul>
+                    <div class="text-end">Total: <span id="cartTotal">$0</span></div>
+                    <button class="btn btn-primary mt-3" id="checkoutButton" onclick="handleCheckoutButtonClick()">Checkout</button>
+                  </div>
+                </ul>
+              </li>
+            </ul>
+            <div class="d-flex gap-3 justify-content-center">
+              <!-- ACTIVADORES PARA EL LOGIN Y EL SIGN UP -->
+              <!-- LOG IN -->
+              <div>
+                <button type="button" class="btn bg-white btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">
+                  Iniciar sesión
+                </button>
+              </div>
+              <!-- SIGN UP -->
+              <div>
+                <button type="button" class="btn btn-lg text-white" data-bs-toggle="modal" data-bs-target="#signUpModal">
+                  Registrarse
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <!-- LOG IN -->
+      <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title text-dark text-center fs-2" id="loginModalLabel">Iniciar sesión</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="logIn">
+              <form>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" name="email" placeholder="name@example.com" title="La parte del nombre serán números y letras, guiones, puntos y subrayados, pero no puede empezar por guión, punto o subrayado. A continuación se indicará la @ y el nombre del servidor que puede contener letras, números, puntos y guiones, seguido de la extensión que será obligatoria y de entre 2 y 6 letras (no números ni caracteres especiales). Tenga en cuenta que no pueden aparecer dos puntos seguidos. " pattern="^[A-ZÑÁÉÍÓÚa-zñáéíóú1-9]{1}[A-ZÑÁÉÍÓÚa-zñáéíóú1-9\.-]+@[A-ZÑÁÉÍÓÚa-zñáéíóú1-9\.-]+\.[A-ZÑÁÉÍÓÚa-zñáéíóú]{2,4}$" required/>
+                </div>
+                <div class="mb-3">
+                  <label for="psw" class="form-label">Contraseña</label>
+                  <input type="password" name="selectorPassw" placeholder="Inserte su contraseña." title="Debe incluir al menos una minúscula, una mayúscula, un número y un carácter especial ( ! @ # $ % ^ & * _ = + - . [espacio] )" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{4,}$" required/>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary bg-ligth-blue text-dark" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-primary bg-ligth-blue text-dark" onclick="logIn()">Iniciar sesión</button>
+                  <button type="button" class="btn btn-secondary bg-ligth-blue text-dark" data-bs-toggle="modal" data-bs-target="#signUpModal" data-bs-dismiss="modal">Registrarme</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- SIGN UP -->
+      <div class="modal fade" id="signUpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title text-brown text-center fs-1" id="signUpModalLabel">Registrarse</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" title="La parte del nombre serán números y letras, guiones, puntos y subrayados, pero no puede empezar por guión, punto o subrayado. A continuación se indicará la @ y el nombre del servidor que puede contener letras, números, puntos y guiones, seguido de la extensión que será obligatoria y de entre 2 y 6 letras (no números ni caracteres especiales). Tenga en cuenta que no pueden aparecer dos puntos seguidos. " required/>
+                </div>
+                <div class="mb-3">
+                  <label for="psw" class="form-label">Contraseña</label>
+                  <input type="password" class="form-control" id="psw" name="selectorPassw" placeholder="Inserte su contraseña." title="Debe incluir al menos una minúscula, una mayúscula, un número y un carácter especial ( ! @ # $ % ^ & * _ = + - . [espacio] )" required/>
+                </div>
+                <div class="mb-3">
+                  <label for="psw_repeat" class="form-label">Repite la contraseña</label>
+                  <input type="password" class="form-control" id="psw_repeat" name="selectorPassw" placeholder="Inserte su contraseña." title="Debe incluir al menos una minúscula, una mayúscula, un número y un carácter especial ( ! @ # $ % ^ & * _ = + - . [espacio] )" required/>
+                </div>
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Estoy de acuerdo con los términos y condiciones.
+                  </label>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary bg-ligth-blue text-dark" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-primary bg-ligth-blue text-dark" onclick="newUser(event)">Regirtrarme</button>
+                  <button type="button" class="btn btn-secondary bg-ligth-blue text-dark" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Ya estoy registrado</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- CARRITO -->
+      <div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Carrito de la compra: </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="carrito-body">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary bg-ligth-blue text-dark" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary bg-ligth-blue text-dark">Finalizar compra</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div id="main-home">
+        <!-- Card -->
+        <section class="card" id="home">
+          <img src="img/nosotros.png" alt="diseños">
+          <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center text-dark gap-sm-5">
+            <h1 class="display-1 mt-5 pt-5 fst-italic">Moda y estilo</h1>
+            <p class="facil-lectura">La elegancia es la única belleza que nunca desaparece. -<span class="text-decoration-underline">Audrey Hepburn</span></p>
+            <div>
+              <button id="start" type="button" class="btn bg-medium-blue text-dark btn-lg fs-1 title-font" data-bs-toggle="modal" data-bs-target="#signUpModal">Comienza tu compra</button>
+            </div>
+          </div>
+        </section>
+        <!-- ABOUT US -->
+        <section id="about_us" class="mt-5 d-flex align-items-center flex-column gap-5">
+          <h1 class="display-3 text-center text-blue text-uppercase">Sobre nosotros</h1>
+          <div class="card mb-3 w-100">
+            <div class="row g-0">
+              <div class="col-md-6 p-2">
+                <img src="img/Empresas-de-moda-tienda.jpg" class="img-fluid rounded-start w-100" alt="Tienda">
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                  <h2 class="card-title display-6 text-center text-red">Boutique fashion</h2>
+                  <p class="card-text fs-6 mt-3 ms-md-4">En nuestra boutique, nos dedicamos a brindar una experiencia de compra única y especial para nuestros clientes. Somos conscientes de que cada persona es única y tiene gustos y preferencias diferentes, por lo que nos esforzamos en ofrecer una amplia variedad de productos para satisfacer diferentes estilos y necesidades.</p>
+                  <p class="card-text fs-6 mt-3 ms-md-4">Nuestro objetivo principal es proporcionar moda de alta calidad y productos de diseño asequibles. Trabajando estrechamente con grandes diseñadores y proveedores confiables para que cada artículo cumpla con nuestros estándares de calidad. Ya sea que estés buscando ropa elegante para una ocasión especial o simplemente quieras actualizar tu guardarropa con las últimas tendencias, tenemos opciones para ti.</p>
+                  <p class="card-text fs-6 mt-3 ms-md-4">Además de ropa, también ofrecemos una selección de accesorios y complementos para ayudarte a crear looks completos y sofisticados para destacar entre la multitud.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- CAROUSEL-->
+        <section id="boceto" class="mt-5">
+          <h1 class="display-3 text-center text-blue text-uppercase">¿Cómo dibujar un boceto de moda?</h1>
+          <div id="carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner mt-5">
+              <div class="carousel-item active">
+                <img src="img/1.jpg" class="d-block w-100" alt="Dibujar el maniquí">
+                <div class="carousel-caption d-none d-md-block facil-lectura">
+                  <h1 class="display-4 text-dark">Dibujar el maniquí</h1>
+                  <p class="fs-3 text-dark">El primer paso para poder realizar una ilustración de alta costura es dibujar modelos, en poses que se podrían encontrar durante un desfile de moda, para realizar la representación de la ropa en situación real.</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="img/2.jpg" class="d-block w-100" alt="Diseño de ropa y accesorios.">
+                <div class="carousel-caption d-none d-md-block facil-lectura">
+                  <h1 class="display-4 text-dark">Diseño de ropa y accesorios.</h1>
+                  <p class="fs-3 text-dark">La única regla será respetar las proporciones de sus modelos en la creación. No olvides que la representación de la textura de los materiales es esencial para que el modelista pueda hacer los patrones en consecuencia. En esta fase también puedes añadir estampados decorativos.</p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <img src="img/3.jpg" class="d-block w-100" alt="Entinta y colorea tu diseño de moda.">
+                <div class="carousel-caption d-none d-md-block facil-lectura">
+                  <h1 class="display-4 text-dark">Entinta y colorea tu diseño de moda.</h1>
+                  <p class="fs-3 text-dark">Para finalizar, el entintado con rotulador permite resaltar las líneas principales de la ropa, y del mismo modo, es aconsejable utilizar una nueva capa para realizarla, ya que es definitiva y no deja margen de error. Luego, puedes pasar a la coloración del diseño y a los degradados, que son muy importantes para reflejar los pliegues y las texturas de la prenda o el accesorio.</p>
+                </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </section>
+        <!-- FORMULARIO DE CONTACTO -->
+        <section id="contact">
+          <h1 class="display-4 text-center text-blue text-uppercase mt-5 pt-5">Contáctanos</h1>
+          <div class="container py-4">
+            <form id="contactForm">
+              <div class="mb-3">
+                <label class="form-label" for="name">Nombre</label>
+                <input class="form-control" id="name" type="text" placeholder="Name" required/>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="emailAddress">Email</label>
+                <input class="form-control" id="emailAddress" type="email" placeholder="Email Address" required/>
+                <div class="invalid-feedback" data-sb-feedback="emailAddress:required">El email es obligatorio.</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="message">Mensaje</label>
+                <textarea class="form-control" id="message" type="text" placeholder="Message" style="height: 10rem;" required></textarea>
+              </div>
+              <div class="d-flex flex-column flex-md-row justify-content-star gap-5">
+                <button class="btn bg-ligth-blue text-dark ps-5 pe-5 fs-4" id="submitButton" type="reset">Limpiar</button>
+                <button class="btn bg-ligth-blue text-dark ps-5 pe-5 fs-4" id="liveToastBtn" type="submit">Enviar</button>
+              </div>
+            </form>
+          </div>
+        </section>
+        <!-- TOASTS DE FORMULARIO DE CONTACTO -->
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+          <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <img src="img/boutique.png" class="rounded me-2 w-h-logo" alt="logo">
+              <strong class="me-auto">Boutique Fashion</strong>
+              <small>Ahora mismo</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              <p>¡Mensaje enviado con éxito!</p>
+            </div>
+          </div>
+        </div>
+        <script>
+          document.getElementById("contactForm").onsubmit = function(e) {
+            //Invalidamos la acción por defecto del botón
+            e.preventDefault();
+            //Reseteamos el formulario
+            var form = document.getElementById("contactForm");
+            form.reset();
+            //Mostramos mensaje quitando el if
+            const toastTrigger = document.getElementById('liveToastBtn')
+            const toastLiveExample = document.getElementById('liveToast')
+            toastTrigger.addEventListener('click', () => {
+              const toast = new bootstrap.Toast(toastLiveExample)
+              toast.show()
+            })
+          }
+        </script>
+      </div>
+      <div id="main-products" style="visibility: hidden; display: none;">
+        <h1 id="titulo-mostrar">Todos nuestros artículos</h1>
+        <div class='ordenar'>
+            <span>Ordenar:</span>
+            <select name="orden" id="orden" onchange="getOption(event)">
+                <option id='asc' value="asc" selected>Precio: ascendente</option>
+                <option id='desc' value="desc">Precio: desdendente</option>
+            </select>
+        </div>
+        <div class="row justify-content-evenly" id="cards-add">
+          <div class="col-md-3 m-1 align-center" id="card" style="display: none; visibility: hidden;">
+            <div class="card align-Elements-center border bg-medium-ligth-blue">
+                <div class='card-header'>
+                    <img src="" class="card-img-top h-imagenes card-image" alt="">
+                </div>
+                <div class="card-body text-center">
+                    <h6 class="card-title"></h6>
+                    <p class="card-price"></p>
+                    <button type="button" class="btn botton-card bg-ligth-blue text-dark masInfo" data-bs-toggle="modal" data-bs-target="#masInfoModal">
+                        Más información
+                    </button>
+                </div>
+            </div>
+          </div>
+          <div class="modal fade" id="masInfoModal" tabindex="-1" aria-labelledby="masInfoModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel title-card"></h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body info-product align-Elements-center">
+                          <div class="n-left">
+                              <img src="" alt="" class="card-image">
+                          </div>
+                          <div class="n-right">
+                              <p class="card-rating"></p><img src="img/estrellas.png"><p class="card-rating-count"></p>
+                              <p class="card-description"></p> 
+                              <p class="card-price"></p>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <buttom type="button" class="btn bg-ligth-blue text-dark addOnclick" data-bs-dismiss="modal">Añadir a la cesta</buttom>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="container text-center">
+      <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-3 my-3 border-top">
+        <div class="col mb-3">
+          <a href="#home" class="d-flex mb-3 link-dark text-decoration-none">
+              <img src="img/boutique-removebg-preview.png" alt="" width="70" height="64" class="d-inline-block align-text-top">
+          </a>
+          <p class="text-muted">&copy; 2023 Boutique Fashion</p>
+        </div>
+        <div class="col mb-3"></div>
+        <div class="col mb-3">
+          <h5 class="fs-3 text-blue">Ayuda</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Contacto</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Envío</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Devoluciones</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+          </ul>
+        </div>
+        <div class="col mb-3">
+          <h5 class="fs-3 text-blue">Sobre nosotros</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Quienes somos</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Trabaja con nosotros</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Política de privacidad</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Términos y condiciones</a></li>
+          </ul>
+        </div>
+        <div class="col mb-3">
+          <h5 class="fs-3 text-blue">Legal</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Política de cookies</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Política de privacidad</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Términos y condiciones</a></li>
+          </ul>
+        </div>    
+      </footer>
+    </div>
+  </body>
+</html>

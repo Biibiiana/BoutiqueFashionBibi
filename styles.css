@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500&family=Ruda:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Enriqueta:wght@400;500;600;700&display=swap');
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 1px;
+}
+
+:root{
+    box-sizing: border-box;
+    line-height: 1.8;
+
+    --dark-bg: #2A2B2F;
+    --dark-blue-bg: #005954;
+    --medium-dark-blue-bg: #338b85;
+    --medium-blue-bg: #5dc1b9;
+    --medium-ligth-blue-bg: #9ce0db;
+    --ligth-blue-bg: rgb(213,255,255,0.5);
+    --red-bg: #b8575e;
+    /* El antiflash es para evitar la cegera que causa el blanco puro */
+    --anti-flash-white: #F2F3F4; 
+    --title-font: 'Ruda', sans-serif;
+    --text-font: 'Roboto Slab', serif;
+    --logo-font: 'Enriqueta', serif;
+}
+
+/* Cambio de colores */
+
+.bg-dark-blue{
+    background-color: var(--dark-blue-bg) !important; 
+}
+
+.bg-medium-dark-blue{
+    background-color: var(--medium-dark-blue-bg) !important;
+}
+
+.bg-medium-blue{
+    background-color: var(--medium-blue-bg) !important;
+}
+
+.bg-medium-ligth-blue{
+    background-color: var(--medium-ligth-blue-bg) !important;
+}
+
+.bg-ligth-blue{
+    background-color: var(--ligth-blue-bg) !important;
+}
+
+.text-dark{
+    color: var(--dark-bg) !important;
+}
+
+.text-blue{
+    color: var(--medium-dark-blue-bg) !important;
+}
+
+.text-dark-blue{
+    color: var(--dark-blue-bg) !important;
+}
+
+.text-font{
+    font-family: var(--text-font);
+}
+
+/* Estilo logo */
+
+.w-h-logo{
+    width: 90px;
+    height: 84px;
+}
+
+/* ---------------------------------------------- */
+
+/* Estilos de botones y enlaces */
+
+button, a, h1, h2{
+    font-family: var(--title-font) !important;
+    font-weight: 600;
+    transition: 0.3s !important;
+}
+
+li .text-dark:hover, a[class~="navbar-brand"]:hover, a[class~=text-muted]:hover{
+    color: var(--dark-blue-bg) !important;
+    background-color: var(--ligth-blue-bg);
+    transition: 0.3s;
+}
+
+a:active, a:focus{
+    outline: none;
+}
+
+a[class~="navbar-brand"]{
+    font-family: var(--logo-font) !important;
+    font-size: calc(2vw + 1.5rem) !important;
+    font-weight: 500;
+}
+
+a[class~="navbar-brand"]:hover{
+    scale: 1 !important;
+}
+
+a.active{
+    color: var(--dark-blue-bg) !important;
+    background-color: var(--ligth-blue-bg) !important;
+}
+
+.btn:hover{
+    scale: 1.1 !important;
+    transition: 0.2s;
+}
+
+.btn:active,
+.btn:hover,
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.btn:hover{
+    scale: 1.1;
+    transition: 0.2s;
+}
+
+/* Carrito */
+
+.carrito{
+    width: calc(3rem);
+    position: absolute;
+    top: 2.5rem;
+    left: 66.7%;
+}
+
+.texto-encima{
+    font-weight: 700;
+    font-size: x-large;
+}
+/* card style */
+.h-imagenes{
+    height: 300px;
+}
+
+.card-body{
+    height: 170px;
+}
+
+.botton-card{
+    position: absolute;
+    bottom: 1rem;
+    left: 23%;
+}
+
+/* Mas informacion */
+.info-product {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-secondary);
+  }
+  
+  /* Imagen izq. */
+  .n-left {
+    width: 50%;
+  }
+  
+  .n-left img {
+    width: 100%;
+  }
+  
+  /* Texto drch. */
+  .n-right {
+    width: 50%;
+    text-align: center;
+  }
+  
+  .n-right p {
+    font-size: calc(1rem+2vw);
+  }
+
+/* Estilos de inputs y contenido */
+
+.form-control:focus {
+    border-color: var(--medium-dark-blue-bg);
+    box-shadow: 0 0 0 0.2rem rgba(0, 132, 255, 0.25);
+} 
+
+p, span, label{
+    font-family: var(--text-font) !important;
+}
+
+body, .card{
+    background-color: var(--anti-flash-white);
+    border: none;
+}
+
+ .display-1{
+    font-size: 7vw !important;
+    text-align: center;
+ }
+
+ h1[class~="display-1"] ~ p{
+    text-align: center;
+    font-size: 2vw;
+ }
+
+ button#trial{
+    font-size: 2vw !important;
+ }
+
+/* Imagen sobre nosotros */
+
+
+/* Limite de tamaño de las imagenes del carrousel y texto */
+.carousel .carousel-item {
+    max-height:550px;
+}
+
+.carousel-item img {
+    object-fit:cover;
+    max-height:550px;
+}
+
+.facil-lectura{
+    background-color: var(--ligth-blue-bg);
+}
+
+/* ---------------------------------------------- */
+
+/* Estilos validacion de formulario */
+
+.form-control:valid {
+    border-color: #90EE90;
+}
+
+.form-control:valid:focus {
+    border-color: #90EE90;
+    box-shadow: 0 0 0 0.2rem rgba(144, 238, 144, 0.25);
+}
+
+.form-control:invalid {
+    border-color: var(--red-bg);
+}
+
+.form-control:invalid:focus {
+    border-color: var(--medium-blue-bg);
+    box-shadow: 0 0 0 0.2rem rgba(0, 140, 255, 0.25);
+}
+
+/* Media querys 576 y 992 */
+@media (max-width: 992px) {
+    .w-h-logo{
+        width: 120px;
+        height: 114px;
+    }
+}
+  
+@media (max-width: 576px) {
+    .w-h-logo{
+        width: 100px;
+        height: 94px;
+    }
+}
+  
